@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Office Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink: #e91e8c;
+      --blue: #2979ff;
+      --purple: #7c3aed;
+      --grad: linear-gradient(90deg, #e91e8c, #7c3aed, #2979ff);
+      --grad-diag: linear-gradient(135deg, #e91e8c 0%, #7c3aed 50%, #2979ff 100%);
+      --bg: #000;
+      --text: #fff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .5;
+    }
+
+    /* ── GLOW BLOBS ── */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 600px; height: 600px; background: var(--pink); top: -200px; left: -200px; animation: drift 12s ease-in-out infinite alternate; }
+    .blob-2 { width: 500px; height: 500px; background: var(--blue); bottom: -150px; right: -150px; animation: drift 15s ease-in-out infinite alternate-reverse; }
+    .blob-3 { width: 400px; height: 400px; background: var(--purple); top: 40%; left: 40%; animation: drift 10s ease-in-out infinite alternate; }
+
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(40px, 30px) scale(1.08); } }
+
+    /* ── LAYOUT ── */
+    .wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      justify-content: center;
+      padding: 32px 0 24px;
+      animation: fadeDown .8s ease both;
+    }
+    .logo-pill {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 28px;
+      border-radius: 50px;
+      border: 2.5px solid transparent;
+      background: linear-gradient(#000, #000) padding-box, var(--grad) border-box;
+      position: relative;
+    }
+    .logo-pill .top { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 3px; color: #fff; }
+    .logo-pill .bot {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 6px;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ── ANNOUNCEMENT BAR ── */
+    .bar {
+      text-align: center;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      background: var(--grad);
+      margin-bottom: 40px;
+      animation: fadeDown .8s .1s ease both;
+    }
+
+    /* ── HEADLINE ── */
+    .headline-block { text-align: center; margin-bottom: 36px; animation: fadeUp .9s .2s ease both; }
+    .eyebrow {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+    }
+    h1 span {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 500;
+      color: rgba(255,255,255,.65);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── VIDEO BOX ── */
+    .video-section { margin-bottom: 44px; animation: fadeUp .9s .35s ease both; }
+    .video-frame {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0a0a0a;
+      aspect-ratio: 16/9;
+      border: 1.5px solid rgba(255,255,255,.08);
+      box-shadow: 0 0 60px rgba(233,30,140,.18), 0 0 120px rgba(41,121,255,.12);
+    }
+    .video-frame iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+    }
+    /* Placeholder when no video */
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+      background: radial-gradient(ellipse at center, #111 0%, #000 100%);
+    }
+    .play-btn {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 40px rgba(233,30,140,.5);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .play-btn svg { margin-left: 5px; }
+    @keyframes pulse { 0%,100% { transform: scale(1); box-shadow: 0 0 40px rgba(233,30,140,.5); } 50% { transform: scale(1.08); box-shadow: 0 0 60px rgba(233,30,140,.8); } }
+    .video-placeholder p { color: rgba(255,255,255,.4); font-size: .85rem; letter-spacing: 1px; }
+
+    /* Gradient border top */
+    .video-frame::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--grad); z-index: 2;
+    }
+
+    /* ── TIMER / URGENCY ── */
+    .urgency {
+      text-align: center;
+      font-size: .82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.5);
+      letter-spacing: 1px;
+      margin-top: 12px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .urgency span { color: #e91e8c; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #e91e8c; display: inline-block; animation: blink 1.2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    /* ── CTA BUTTON ── */
+    .cta-section { text-align: center; margin-bottom: 56px; animation: fadeUp .9s .5s ease both; }
+    .cta-btn {
+      display: inline-block;
+      padding: 20px 52px;
+      border-radius: 50px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 3px;
+      text-decoration: none;
+      color: #fff;
+      background: var(--grad);
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 40px rgba(233,30,140,.4);
+      cursor: pointer;
+      border: none;
+    }
+    .cta-btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(rgba(255,255,255,.15), transparent);
+      border-radius: inherit;
+    }
+    .cta-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 16px 60px rgba(233,30,140,.55); }
+    .cta-btn:active { transform: translateY(0) scale(.99); }
+    .cta-sub { margin-top: 12px; font-size: .8rem; color: rgba(255,255,255,.35); letter-spacing: 1px; }
+    .cta-sub strong { color: rgba(255,255,255,.6); }
+
+    /* ── BENEFITS ── */
+    .benefits { margin-bottom: 60px; animation: fadeUp .9s .55s ease both; }
+    .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .benefit-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px;
+      padding: 24px 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s, transform .3s;
+    }
+    .benefit-card:hover { border-color: rgba(233,30,140,.4); transform: translateY(-4px); }
+    .benefit-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--grad);
+      opacity: 0; transition: opacity .3s;
+    }
+    .benefit-card:hover::before { opacity: 1; }
+    .benefit-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .benefit-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 6px; }
+    .benefit-card p { font-size: .85rem; color: rgba(255,255,255,.5); line-height: 1.5; }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .section-title span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { margin-bottom: 60px; animation: fadeUp .9s .6s ease both; }
+    .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .testi-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px;
+      padding: 22px 20px;
+      transition: transform .3s;
+    }
+    .testi-card:hover { transform: translateY(-3px); }
+    .stars { color: #e91e8c; font-size: 1rem; margin-bottom: 10px; letter-spacing: 2px; }
+    .testi-card p { font-size: .9rem; color: rgba(255,255,255,.7); line-height: 1.6; margin-bottom: 14px; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 10px; }
+    .avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
+    }
+    .testi-author .name { font-weight: 700; font-size: .85rem; }
+    .testi-author .role { font-size: .75rem; color: rgba(255,255,255,.4); }
+
+    /* ── GUARANTEE ── */
+    .guarantee {
+      margin-bottom: 60px;
+      display: flex; align-items: center; gap: 28px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 16px;
+      padding: 28px 32px;
+      animation: fadeUp .9s .65s ease both;
+    }
+    .guarantee-icon { font-size: 3.5rem; flex-shrink: 0; }
+    .guarantee h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 6px; }
+    .guarantee p { font-size: .88rem; color: rgba(255,255,255,.55); line-height: 1.6; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 28px 0;
+      text-align: center;
+      font-size: .75rem;
+      color: rgba(255,255,255,.25);
+      letter-spacing: 1px;
+      animation: fadeUp .9s .7s ease both;
+    }
+    footer a { color: rgba(255,255,255,.35); text-decoration: none; margin: 0 12px; }
+    footer a:hover { color: #e91e8c; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(24px);  } to { opacity:1; transform:translateY(0); } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .guarantee { flex-direction: column; text-align: center; }
+      .cta-btn { padding: 18px 36px; font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<div class="bar">🔥 Vagas limitadas — Garanta a sua agora</div>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-pill">
+      <span class="top">HOME OFFICE</span>
+      <span class="bot">DIGITAL</span>
+    </div>
+  </header>
+
+  <!-- HEADLINE -->
+  <div class="headline-block">
+    <div class="eyebrow">✦ Método Exclusivo ✦</div>
+    <h1>Descubra Como <span>Trabalhar de Casa</span><br>e Ganhar em Dólar Todos os Dias</h1>
+    <p class="sub">Assista ao vídeo abaixo e veja como pessoas comuns estão faturando mais de R$10.000/mês trabalhando pelo celular — sem chefe, sem horário fixo.</p>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="video-section">
+    <div class="video-frame">
+      <!-- Substitua o src abaixo pelo seu link de vídeo -->
+      <!-- Exemplo YouTube: src="https://www.youtube.com/embed/SEU_ID_AQUI?autoplay=1&rel=0&controls=0" -->
+      <!-- Exemplo Vimeo:   src="https://player.vimeo.com/video/SEU_ID_AQUI?autoplay=1" -->
+      <iframe src="https://www.youtube.com/embed/NV5D52Fh-lI?autoplay=1&rel=0&controls=0&modestbranding=1&showinfo=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="urgency">
+      <span class="dot"></span>
+      <span>127 pessoas assistindo agora</span>
+      &nbsp;·&nbsp; Oferta expira em: <span id="timer">14:59</span>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <a href="#" class="cta-btn">QUERO COMEÇAR AGORA →</a>
+    <p class="cta-sub">🔒 Pagamento seguro · <strong>Acesso imediato</strong> · Garantia de 7 dias</p>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="benefits">
+    <div class="section-title">O que você vai <span>aprender</span></div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">💻</div>
+        <h3>Trabalhe de Qualquer Lugar</h3>
+        <p>Tudo que você precisa é de um celular ou computador e internet. Sem necessidade de sair de casa.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💰</div>
+        <h3>Renda em Dólar</h3>
+        <p>Aprenda a receber em moeda forte e multiplique seus ganhos sem esforço extra.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">⚡</div>
+        <h3>Resultados Rápidos</h3>
+        <p>Método validado com alunos que faturaram já na primeira semana de aplicação.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🎯</div>
+        <h3>Passo a Passo Completo</h3>
+        <p>Do zero ao primeiro pagamento. Sem conhecimento técnico necessário.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="testimonials">
+    <div class="section-title">O que nossos <span>alunos dizem</span></div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Em 3 semanas já tinha recuperado o investimento. O método é simples e funciona de verdade!"</p>
+        <div class="testi-author">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">Ana Paula S.</div>
+            <div class="role">São Paulo, SP</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Larguei meu emprego CLT depois de 2 meses. Hoje ganho 3x mais trabalhando de casa."</p>
+        <div class="testi-author">
+          <div class="avatar">R</div>
+          <div>
+            <div class="name">Ricardo M.</div>
+            <div class="role">Belo Horizonte, MG</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Nunca pensei que conseguiria trabalhar pelo celular. Hoje tenho liberdade de tempo e financeira."</p>
+        <div class="testi-author">
+          <div class="avatar">C</div>
+          <div>
+            <div class="name">Carla T.</div>
+            <div class="role">Curitiba, PR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUARANTEE -->
+  <div class="guarantee">
+    <div class="guarantee-icon">🛡️</div>
+    <div>
+      <h3>Garantia Incondicional de 7 Dias</h3>
+      <p>Se por qualquer motivo você não ficar satisfeito, devolvemos 100% do seu dinheiro — sem burocracia, sem perguntas. O risco é todo nosso.</p>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="cta-section">
+    <a href="#" class="cta-btn">SIM, QUERO MINHA VAGA →</a>
+    <p class="cta-sub">🔥 Oferta por tempo limitado · Acesso vitalício</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Home Office Digital · Todos os direitos reservados</p>
+    <p style="margin-top:10px;">
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Termos de Uso</a>
+      <a href="#">Contato</a>
+    </p>
+    <p style="margin-top:14px; font-size:.7rem; color:rgba(255,255,255,.15); max-width:560px; margin-left:auto; margin-right:auto;">
+      Este site não é afiliado ao Facebook ou Instagram. Os resultados mencionados não são garantidos e podem variar de pessoa para pessoa.
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  // Countdown timer
+  let total = 14 * 60 + 59;
+  const timerEl = document.getElementById('timer');
+  setInterval(() => {
+    if (total <= 0) { total = 14 * 60 + 59; return; }
+    total--;
+    const m = String(Math.floor(total / 60)).padStart(2, '0');
+    const s = String(total % 60).padStart(2, '0');
+    timerEl.textContent = `${m}:${s}`;
+  }, 1000);
+</script>
+
+</body>
+</html>
