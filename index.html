@@ -295,6 +295,52 @@
     footer a { color: rgba(255,255,255,.35); text-decoration: none; margin: 0 12px; }
     footer a:hover { color: #e91e8c; }
 
+    /* ── SIMULATOR ── */
+    .simulator-section { margin-bottom: 60px; animation: fadeUp .9s .5s ease both; }
+    .simulator-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; align-items: start; }
+    .sim-cards { display: flex; flex-direction: column; gap: 16px; }
+    .sim-card { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 22px 20px; transition: border-color .3s, transform .3s; }
+    .sim-card:hover { border-color: rgba(233,30,140,.4); transform: translateX(4px); }
+    .sim-card-icon { width: 38px; height: 38px; border-radius: 10px; background: rgba(233,30,140,.15); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 12px; }
+    .sim-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 1px; margin-bottom: 6px; }
+    .sim-card p { font-size: .82rem; color: rgba(255,255,255,.45); line-height: 1.5; }
+    .sim-box { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); border-radius: 16px; padding: 28px 28px 24px; }
+    .sim-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .sim-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; color: rgba(255,255,255,.7); }
+    .sim-tabs { display: flex; gap: 6px; }
+    .sim-tab { padding: 6px 14px; border-radius: 20px; font-size: .75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border: none; transition: all .2s; }
+    .sim-tab.active { background: var(--grad); color: #fff; }
+    .sim-tab:not(.active) { background: rgba(255,255,255,.07); color: rgba(255,255,255,.5); }
+    .sim-tab:not(.active):hover { background: rgba(255,255,255,.12); }
+    .sim-label { font-size: .7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 8px; display: flex; justify-content: space-between; }
+    .sim-label span { font-size: .9rem; color: #fff; font-weight: 700; letter-spacing: 0; }
+    .sim-range { width: 100%; -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; outline: none; cursor: pointer; margin-bottom: 28px; background: linear-gradient(90deg, #e91e8c var(--pct, 37%), rgba(255,255,255,.12) var(--pct, 37%)); }
+    .sim-range::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--grad); cursor: pointer; box-shadow: 0 0 12px rgba(233,30,140,.6); }
+    .sim-estimate { text-align: center; margin-bottom: 20px; }
+    .sim-estimate-label { font-size: .68rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 4px; }
+    .sim-amount { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 8vw, 4rem); letter-spacing: 2px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+    .sim-usd { display: inline-block; margin-top: 8px; padding: 4px 14px; border-radius: 20px; background: rgba(233,30,140,.15); border: 1px solid rgba(233,30,140,.3); font-size: .8rem; font-weight: 700; color: #e91e8c; }
+    .sim-cta { display: block; width: 100%; padding: 16px; border-radius: 50px; border: none; cursor: pointer; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 3px; color: #fff; background: var(--grad); transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 24px rgba(233,30,140,.35); text-decoration: none; text-align: center; }
+    .sim-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(233,30,140,.5); }
+    .sim-note { text-align: center; font-size: .68rem; color: rgba(255,255,255,.2); margin-top: 10px; letter-spacing: 1px; }
+
+    /* ── COMPANIES ── */
+    .companies-section { margin-bottom: 60px; animation: fadeUp .9s .58s ease both; }
+    .companies-eyebrow { text-align: center; font-size: .68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 10px; }
+    .companies-title { text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem, 4vw, 2rem); letter-spacing: 2px; margin-bottom: 8px; }
+    .companies-sub { text-align: center; font-size: .85rem; color: rgba(255,255,255,.4); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+    .companies-logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 28px; padding: 28px 24px; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06); border-radius: 16px; }
+    .company-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; color: rgba(255,255,255,.35); padding: 8px 14px; border-radius: 8px; transition: color .3s, background .3s; white-space: nowrap; }
+    .company-logo:hover { color: rgba(255,255,255,.75); background: rgba(255,255,255,.05); }
+    .company-logo.google { color: rgba(66,133,244,.5); } .company-logo.google:hover { color: rgba(66,133,244,.9); }
+    .company-logo.amazon { color: rgba(255,153,0,.5); } .company-logo.amazon:hover { color: rgba(255,153,0,.9); }
+    .company-logo.meta { color: rgba(0,132,255,.5); } .company-logo.meta:hover { color: rgba(0,132,255,.9); }
+    .company-logo.netflix { color: rgba(229,9,20,.5); } .company-logo.netflix:hover { color: rgba(229,9,20,.9); }
+    .co-logo { opacity: 0.55; transition: opacity .3s, transform .3s; filter: grayscale(30%); }
+    .co-logo:hover { opacity: 1; transform: scale(1.08); filter: grayscale(0%); }
+    .company-logo.microsoft { color: rgba(127,186,0,.5); } .company-logo.microsoft:hover { color: rgba(127,186,0,.9); }
+    @media (max-width: 680px) { .simulator-inner { grid-template-columns: 1fr; } }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeUp   { from { opacity:0; transform:translateY(24px);  } to { opacity:1; transform:translateY(0); } }
@@ -337,7 +383,7 @@
       <!-- Substitua o src abaixo pelo seu link de vídeo -->
       <!-- Exemplo YouTube: src="https://www.youtube.com/embed/SEU_ID_AQUI?autoplay=1&rel=0&controls=0" -->
       <!-- Exemplo Vimeo:   src="https://player.vimeo.com/video/SEU_ID_AQUI?autoplay=1" -->
-      <iframe src="https://www.youtube.com/embed/NV5D52Fh-lI?autoplay=1&rel=0&controls=0&modestbranding=1&showinfo=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/iAf4yhkzXP4?autoplay=1&rel=0&controls=0&modestbranding=1&showinfo=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <div class="urgency">
       <span class="dot"></span>
@@ -375,6 +421,49 @@
         <div class="benefit-icon">🎯</div>
         <h3>Passo a Passo Completo</h3>
         <p>Do zero ao primeiro pagamento. Sem conhecimento técnico necessário.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMULATOR -->
+  <div class="simulator-section">
+    <div class="section-title">Quanto voce pode <span>faturar?</span></div>
+    <p class="sub" style="text-align:center;margin-bottom:28px;">Simule seus ganhos mensais baseados em horas diarias e <strong style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">experiencia no mercado.</strong></p>
+    <div class="simulator-inner">
+      <div class="sim-cards">
+        <div class="sim-card">
+          <div class="sim-card-icon">&#x1F4B5;</div>
+          <h4>Remuneracao em Dolar</h4>
+          <p>Receba diretamente em moeda estrangeira e aproveite a valorizacao do cambio.</p>
+        </div>
+        <div class="sim-card">
+          <div class="sim-card-icon">&#x1F550;</div>
+          <h4>Flexibilidade Total</h4>
+          <p>Voce molda seu horario. Trabalhe de onde quiser e quando preferir.</p>
+        </div>
+        <div class="sim-card">
+          <div class="sim-card-icon">&#x1F4C8;</div>
+          <h4>Crescimento Continuo</h4>
+          <p>Quanto mais experiencia, maior sua taxa horaria e seus ganhos mensais.</p>
+        </div>
+      </div>
+      <div class="sim-box">
+        <div class="sim-header">
+          <div class="sim-title">SIMULADOR</div>
+          <div class="sim-tabs">
+            <button class="sim-tab active" onclick="setLevel('iniciante',this)">INICIANTE</button>
+            <button class="sim-tab" onclick="setLevel('experiente',this)">EXPERIENTE</button>
+          </div>
+        </div>
+        <div class="sim-label">HORAS POR DIA <span id="hoursLabel">4h</span></div>
+        <input type="range" class="sim-range" id="hoursRange" min="1" max="8" value="4" oninput="updateSim()" />
+        <div class="sim-estimate">
+          <div class="sim-estimate-label">Estimativa Mensal</div>
+          <div class="sim-amount" id="simAmount">R$ 2.100</div>
+          <div class="sim-usd" id="simUSD">~ US$ 400</div>
+        </div>
+        <a href="https://pay.kiwify.com.br/i2FpFIm" class="sim-cta">AGENDAR MINHA VAGA &rarr;</a>
+        <p class="sim-note">*Calculo baseado em 22 dias trabalhados por mes</p>
       </div>
     </div>
   </div>
@@ -460,6 +549,29 @@
     const s = String(total % 60).padStart(2, '0');
     timerEl.textContent = `${m}:${s}`;
   }, 1000);
+
+  // Simulator — 1h iniciante = R$650/mes base
+  let simLevel = 'iniciante';
+  const RATE = 650; // R$ por hora/dia para iniciante (22 dias/mes)
+  function setLevel(level, btn) {
+    simLevel = level;
+    document.querySelectorAll('.sim-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    updateSim();
+  }
+  function updateSim() {
+    const hours = parseInt(document.getElementById('hoursRange').value);
+    const max = 8;
+    const pct = ((hours - 1) / (max - 1) * 100).toFixed(0);
+    document.getElementById('hoursRange').style.setProperty('--pct', pct + '%');
+    document.getElementById('hoursLabel').textContent = hours + 'h';
+    const multiplier = simLevel === 'experiente' ? 2.1 : 1;
+    const brl = Math.round(hours * RATE * multiplier / 50) * 50;
+    const usd = Math.round(brl / 5.25 / 10) * 10;
+    document.getElementById('simAmount').textContent = 'R$ ' + brl.toLocaleString('pt-BR');
+    document.getElementById('simUSD').textContent = '~ US$ ' + usd.toLocaleString('pt-BR');
+  }
+  updateSim();
 </script>
 
 </body>
